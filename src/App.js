@@ -49,8 +49,8 @@ function App() {
           </form>
         </div>
         <div className="display-container">
-          {city1 && <CityDisplay city={city1} />}
-          {city2 && <CityDisplay city={city2} />}
+          <div className="display">{city1 && <CityDisplay city={city1} />}</div>
+          <div className="display">{city2 && <CityDisplay city={city2} />}</div>
         </div>
       </div>
     </div>
