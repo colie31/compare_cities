@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react"
 import './App.css';
 //components
 import CustomInput from "./components/CustomInput"
+import CityDisplay from "./components/CityDisplay"
 
 function App() {
   const [searchUrl, setSearchUrl] = useState("");
   const [cityUrl, setCityUrl] = useState("");
 
-  const [city1, setCity1] = useState([]);
-  const [city2, setCity2] = useState([]);
+  const [city1, setCityOneHref] = useState("");
+  const [city2, setCityTwoHref] = useState("");
 
-  // const [items1, setItems1] = useState([]);
-  // const [items2, setItems2] = useState([]);
 
   useEffect(() => {
     fetch("https://api.teleport.org/api/")
@@ -33,37 +32,25 @@ function App() {
 
   if(!cityUrl || !searchUrl) return null;
 
-  // const handleChange = (e, setter) => {
-  //   if(e.target.value === "") return
-  //   let encoded = encodeURI(e.target.value.toLowerCase()); 
-  //   let query = `?search=${encoded}`
-  //   let url = searchUrl.replace("{?search}", query) + "&limit=5";
-  //   console.log(query);
-  //   console.log("url", url)
-  //   fetch(url)
-  //   .then(response => response.json())
-  //   .then(data => setter(data._embedded["city:search-results"]))
-  //   console.log(items1)
-  // };
 
-  const handleSubmit = (item) => {
-    console.log(item);
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
-
-  console.log(cityUrl);
-  console.log(searchUrl);
 
   return (
     <div className="App">
       <div>
         <header>Please select two urban areas to compare data:</header>
         <div className="form-container">
-          <form className="from" onSubmit={handleSubmit}>
-            <CustomInput searchUrl={searchUrl} setCity={setCity1} />
+          <form className="form" onSubmit={handleSubmit}>
+            <CustomInput searchUrl={searchUrl} setCity={setCityOneHref} />
             <span> and </span>
-            <CustomInput searchUrl={searchUrl} setCity={setCity2} />
-            <button type="submit">Compare Cities</button>
+            <CustomInput searchUrl={searchUrl} setCity={setCityTwoHref} />
           </form>
+        </div>
+        <div className="display-container">
+          {city1 && <CityDisplay city={city1} />}
+          {city2 && <CityDisplay city={city2} />}
         </div>
       </div>
     </div>

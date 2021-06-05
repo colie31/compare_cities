@@ -36,3 +36,51 @@
     transform: rotate(360deg);
   }
 }
+
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.form > * {
+  margin: 40px;
+}
+
+input {
+  width: 400px;
+}
+
+.options {
+  position: absolute;
+
+}
+
+button {
+  margin: auto;
+}
+
+.options {
+  background-color: white;
+}
+
+.options > div:hover {
+  background-color: lightgrey;
+}
+
+.display-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.display-container > .display {
+  width: 50%;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+}
+
+
