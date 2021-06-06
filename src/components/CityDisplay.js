@@ -18,10 +18,12 @@ const CityDisplay = ({ city }) => {
         <>
         <h1>{city.name}</h1>
         {cityFiveCategories.length && cityFiveCategories.map(category => {
+            let roundedNumber = Math.round(category.score_out_of_10 * 10) / 10;
+
             return (
                 <div key={category.name}>
                 <h4>{category.name}</h4>
-                <p>{`${Math.round(category.score_out_of_10*10)/10} / 10`}</p>
+                <p>{`${roundedNumber} / 10`}</p>
                 </div>
             )
             })}
