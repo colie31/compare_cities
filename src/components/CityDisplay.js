@@ -21,7 +21,7 @@ const CityDisplay = ({ city }) => {
             return (
                 <div key={category.name}>
                 <h4>{category.name}</h4>
-                <p>{`${category.score_out_of_10} / 10`}</p>
+                <p>{`${Math.round(category.score_out_of_10*10)/10} / 10`}</p>
                 </div>
             )
             })}
