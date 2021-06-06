@@ -25,9 +25,7 @@ const CityDisplay = ({ city }) => {
                 <div key={category.name}>
                 <h4>{category.name}</h4>
                 <p>{`${roundedNumber} / 10`}</p>
-                <div className="bar-container">
-                    <BarDisplay score={roundedNumber} />
-                </div>
+                <BarDisplay score={roundedNumber} />
                 </div>
             )
             })}
