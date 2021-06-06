@@ -2,7 +2,7 @@ import React from "react";
 
 const CityDisplay = ({ city }) => {
    
-    if(city.error) return <div>{city.error}</div>
+    if(city.error) return <div>{`${city.error} For City ${city.name}`}</div>
     if(!city.score) return <div>Loading...</div>
     
     const cityFiveCategories = city.score.filter(category => {
