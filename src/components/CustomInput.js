@@ -24,7 +24,34 @@ const CustomInput = ({ searchUrl, setCity }) => {
     const handleClick = (e) => {
         setSearchTerm(e.target.innerHTML)
         setOptions([])
-        setCity(e.target.value)
+
+         fetch(e.target.value)
+           .then((response) => response.json())
+           .then((data) => {
+               setCity({
+                   name: data.name,
+               })
+             let cityScoreInfo = data._links["city:urban_area"]
+             if(!cityScoreInfo) throw Error("No Data Available")
+             return fetch(cityScoreInfo.href + "scores");
+           })
+           .then((response) => response.json())
+           .then((data) => setCity(prev => {
+               return {
+                ...prev,
+                score: data.categories
+               }
+            }))
+           .catch((error) => {
+             setCity(prev => {
+                 return {
+                     ...prev,
+                     error: error.message
+                 }
+             })
+             console.log(error);
+           });
+        
     }
     
     return (
