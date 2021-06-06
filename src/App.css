@@ -82,6 +82,13 @@ input {
 .display {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.bar-container {
+  width: 200px;
+  height: 25px;
+  background-color: lightgray;
 }
 
 
