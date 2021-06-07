@@ -4,9 +4,9 @@ import BarDisplay from "./BarDisplay"
 const CityDisplay = ({ city }) => {
    
     if(city.error) return <div>{`${city.error} For City ${city.name}`}</div>
-    if(!city.score) return <div>Loading...</div>
+    if(!city.categories) return <div>Loading...</div>
     
-    const cityFiveCategories = city.score.filter(category => {
+    const cityFiveCategories = city.categories.filter(category => {
        return category.name === "Housing" ||
         category.name === "Cost of Living" ||
         category.name === "Safety" ||

@@ -21,37 +21,23 @@ const CustomInput = ({ searchUrl, setCity }) => {
           });
     };
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         setSearchTerm(e.target.innerHTML)
         setOptions([])
          
-        fetch(e.target.value)
-        .then((response) => response.json())
-        .then((data) => {
-            setCity({
-                name: data.name,
-            })
-            let cityScoreInfo = data._links["city:urban_area"]
-            if(!cityScoreInfo) throw Error("No Data Available")
-            return fetch(cityScoreInfo.href + "scores");
-        })
-        .then((response) => response.json())
-        .then((data) => setCity(prev => {
-            return {
-            ...prev,
-            score: data.categories
-            }
-        }))
-        .catch((error) => {
-            setCity(prev => {
-                return {
-                    ...prev,
-                    error: error.message
-                }
-            })
-            console.log(error);
-        });
+        const cityResponse = await fetch(e.target.value);
+        const cityData = await cityResponse.json();
+       
+        const name = cityData.name;
+        const cityCategoryLink = cityData._links["city:urban_area"]
         
+        if(!cityCategoryLink) return setCity({ name, error: "No Data Available"})
+        
+        const categoryResponse = await fetch(cityCategoryLink.href + "scores");
+        const categoryData = await categoryResponse.json();
+     
+        return setCity({ name, categories: categoryData.categories });
+    
     }
     
     return (
